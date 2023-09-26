@@ -2,12 +2,10 @@ FROM node:16.14.0-alpine
 
 WORKDIR /app
 
-RUN apk add pnpm
+COPY ../frontend/package*.json ./
 
-COPY ../frontend/package.json ../frontend/pnpm-lock.yaml ./
-
-RUN pnpm install
+RUN npm install
 
 COPY ../frontend/ ./
 
-CMD ["pnpm", "dev"]
+CMD ["npm", "run", "dev"]

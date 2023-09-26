@@ -3,7 +3,9 @@ version: '3.8'
 services:
 
   frontend:
-    build: ./docker/Frontend-Dockerfile
+    build:
+      context: .
+      dockerfile: ./docker/Frontend-Dockerfile
     container_name: frontend
     restart: always
     environment:
@@ -13,7 +15,9 @@ services:
     volumes:
       - ./frontend/:/app
   backend:
-    build: ./docker/Backend-Dockerfile
+    build:
+      context: .
+      dockerfile: ./docker/Backend-Dockerfile
     container_name: backend
     restart: always
     environment:
