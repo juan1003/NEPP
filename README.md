@@ -1,2 +1,2 @@
-# midcore-app
+# NEPP
 ## Boilerplate for NEPP stack
