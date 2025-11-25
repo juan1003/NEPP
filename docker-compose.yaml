@@ -1,23 +1,8 @@
-
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: ./docker/Frontend-Dockerfile
-    container_name: frontend
-    restart: always
-    environment:
-      API_ENDPOINT: http://backend:8080
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend/:/app
-    depends_on:
-      - backend
   backend:
     build:
-      context: .
-      dockerfile: ./docker/Backend-Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: backend
     restart: always
     environment:
@@ -25,7 +10,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./backend/:/app
+      - .:/app
     depends_on:
       - postgres
   postgres:
