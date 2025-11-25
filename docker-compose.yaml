@@ -1,7 +1,5 @@
-version: '3.8'
 
 services:
-
   frontend:
     build:
       context: .
@@ -9,11 +7,13 @@ services:
     container_name: frontend
     restart: always
     environment:
-      - API_ENDPOINT="http://localhost:8080"
+      API_ENDPOINT: http://backend:8080
     ports:
       - "3000:3000"
     volumes:
       - ./frontend/:/app
+    depends_on:
+      - backend
   backend:
     build:
       context: .
@@ -21,18 +21,20 @@ services:
     container_name: backend
     restart: always
     environment:
-      - DATABASE_URL="postgresql://admin:pass1234@localhost:5432/midcore"
+      DATABASE_URL: postgresql://admin:pass1234@postgres:5432/midcore
     ports:
       - "8080:8080"
     volumes:
       - ./backend/:/app
+    depends_on:
+      - postgres
   postgres:
     image: postgres
     container_name: database
     restart: always
     environment:
-      - POSTGRES_USERNAME="admin"
-      - POSTGRES_PASSWORD="pass1234"
-      - POSTGRES_DATABASE="midcore"
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass1234
+      POSTGRES_DB: midcore
     ports:
       - "5432:5432"
