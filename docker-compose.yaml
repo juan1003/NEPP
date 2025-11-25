@@ -23,3 +23,15 @@ services:
       POSTGRES_DB: midcore
     ports:
       - "5432:5432"
+
+  adminer:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin1234
+    ports:
+      - "8081:80"
+    depends_on:
+      - postgres
